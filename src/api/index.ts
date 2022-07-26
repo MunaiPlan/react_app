@@ -5,7 +5,7 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
 
-import { logout } from '~/modules/auth/authSlice';
+import { logout } from '~/modules/auth';
 import { AppState } from '~/store';
 
 export const baseQuery = fetchBaseQuery({

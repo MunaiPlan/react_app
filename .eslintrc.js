@@ -83,6 +83,12 @@ module.exports = {
         },
       },
     ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['~/modules/*/*'],
+      },
+    ],
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
