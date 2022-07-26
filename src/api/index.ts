@@ -5,11 +5,12 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
 
+import { API_URL } from '~/config';
 import { logout } from '~/modules/auth';
 import { AppState } from '~/store';
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL,
+  baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
     const {
       authSlice: { token },
