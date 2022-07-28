@@ -1,4 +1,4 @@
-import { Todo } from '~/modules/todo';
+import { Todo } from '~/features/todo';
 
 export interface TodoListResponse {
   count: number;

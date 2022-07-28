@@ -12,8 +12,8 @@ import {
 
 import authApi, { AUTH_API_REDUCER_KEY } from '~/api/auth/api';
 import todoApi, { TODO_API_REDUCER_KEY } from '~/api/todo/api';
-import { authReducer, authSlice } from '~/modules/auth';
-import { todoReducer, todoSlice } from '~/modules/todo';
+import { authReducer, authSlice } from '~/features/auth';
+import { todoReducer, todoSlice } from '~/features/todo';
 
 const reducers = {
   [authSlice.name]: authReducer,

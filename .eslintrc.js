@@ -86,7 +86,7 @@ module.exports = {
     'no-restricted-imports': [
       'error',
       {
-        patterns: ['~/modules/*/*'],
+        patterns: ['~/features/*/*'],
       },
     ],
     'import/first': 'error',

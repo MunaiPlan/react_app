@@ -1,4 +1,4 @@
-import { User } from '~/modules/auth';
+import { User } from '~/features/auth';
 
 export interface LoginRequest {
   email: string;

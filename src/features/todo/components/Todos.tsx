@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Container, Typography } from '@mui/material';
 
-import { TodoForm } from '../components/TodoForm';
-import { TodoList } from '../components/TodoList';
 import { useTodos } from '../hooks/useTodos';
+import { TodoForm } from './TodoForm';
+import { TodoList } from './TodoList';
 
-export function Todo() {
+export function Todos() {
   const { todos, isLoading } = useTodos();
 
   if (isLoading) return <div> Loading... </div>;

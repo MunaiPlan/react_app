@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 
 import { API_URL } from '~/config';
-import { logout } from '~/modules/auth';
+import { logout } from '~/features/auth';
 import { AppState } from '~/store';
 
 export const baseQuery = fetchBaseQuery({
