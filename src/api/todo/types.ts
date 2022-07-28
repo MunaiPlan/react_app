@@ -1,5 +1,9 @@
 import { Todo } from '~/features/todo';
 
+export interface TodoResponse {
+  data: Todo
+}
+
 export interface TodoListResponse {
   count: number;
   data: Todo[];

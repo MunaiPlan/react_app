@@ -7,6 +7,7 @@ import {
   TodoCreateResponse,
   TodoDeleteResponse,
   TodoListResponse,
+  TodoResponse,
   TodoUpdateRequest,
   TodoUpdateResponse,
 } from './types';
@@ -16,8 +17,20 @@ export const TODO_API_REDUCER_KEY = 'todoApi';
 const todoApi = createApi({
   reducerPath: TODO_API_REDUCER_KEY,
   baseQuery,
-  tagTypes: ['TODO_LIST'],
+  tagTypes: ['Todo'],
   endpoints: (builder) => ({
+    getTodo: builder.query<TodoResponse, string>({
+      query: (id) => ({
+        url: `/task/${id}`,
+        method: 'GET',
+      }),
+      providesTags: (_data, _err, arg) => [
+        {
+          type: 'Todo',
+          id: arg,
+        },
+      ],
+    }),
     getTodos: builder.query<TodoListResponse, null>({
       query: () => ({
         url: '/task',
@@ -25,7 +38,8 @@ const todoApi = createApi({
       }),
       providesTags: () => [
         {
-          type: 'TODO_LIST',
+          type: 'Todo',
+          id: 'TODO_LIST',
         },
       ],
     }),
@@ -35,7 +49,7 @@ const todoApi = createApi({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: () => [{ type: 'TODO_LIST' }],
+      invalidatesTags: () => [{ type: 'Todo', id: 'TODO_LIST' }],
     }),
     updateTodo: builder.mutation<TodoUpdateResponse, TodoUpdateRequest>({
       query: ({ _id, ...data }) => ({
@@ -43,11 +57,16 @@ const todoApi = createApi({
         method: 'PUT',
         body: data,
       }),
+      invalidatesTags: (_data, _err, { _id }) => [
+        { type: 'Todo', id: _id },
+      ],
       async onQueryStarted({ _id, ...patch }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           todoApi.util.updateQueryData('getTodos', null, (todoData) => {
             const todoIndex = findIndex(todoData.data, ['_id', _id]);
-            if (todoIndex !== -1) { Object.assign(todoData.data[todoIndex], patch); }
+            if (todoIndex !== -1) {
+              Object.assign(todoData.data[todoIndex], patch);
+            }
           }),
         );
         try {
@@ -62,7 +81,10 @@ const todoApi = createApi({
         url: `/task/${_id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: () => [{ type: 'TODO_LIST' }],
+      invalidatesTags: (_data, _err, arg) => [
+        { type: 'Todo', id: 'TODO_LIST' },
+        { type: 'Todo', id: arg },
+      ],
     }),
   }),
 });
