@@ -1,12 +1,22 @@
 import * as React from 'react';
 
-import { Button, CircularProgress } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  createTheme,
+  StyledEngineProvider,
+  ThemeProvider,
+} from '@mui/material';
+// import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { useDarkMode } from 'usehooks-ts';
 
 import { store, persistor } from '~/store';
+import { darkTheme, GlobalStyles, lightTheme } from '~/styles';
 
 function ErrorFallback() {
   return (
@@ -26,6 +36,23 @@ type AppProviderProps = {
   children: React.ReactNode;
 };
 
+export function AppThemeProvider({ children }: AppProviderProps) {
+  const { isDarkMode } = useDarkMode();
+  const theme = isDarkMode ? darkTheme : lightTheme;
+  const muiTheme = createTheme({ ...theme, palette: { mode: isDarkMode ? 'dark' : 'light' } });
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={muiTheme}>
+        <StyledThemeProvider theme={muiTheme}>
+          <GlobalStyles />
+          {children}
+        </StyledThemeProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
+}
+
 export function AppProvider({ children }: AppProviderProps) {
   return (
     <React.Suspense
@@ -39,10 +66,9 @@ export function AppProvider({ children }: AppProviderProps) {
         <HelmetProvider>
           <Provider store={store}>
             <PersistGate loading={<CircularProgress />} persistor={persistor}>
-              {children}
+              <AppThemeProvider>{children}</AppThemeProvider>
             </PersistGate>
           </Provider>
-
         </HelmetProvider>
       </ErrorBoundary>
     </React.Suspense>
