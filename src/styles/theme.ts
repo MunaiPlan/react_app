@@ -1,13 +1,13 @@
-// const breakpoints = {
-//   mobileS: '320px',
-//   mobileM: '375px',
-//   mobileL: '425px',
-//   tabletS: '768px',
-//   tabletL: '1112px',
-//   laptopS: '1366px',
-//   laptopM: '1440px',
-//   desktop: '1680px',
-// };
+const breakpoints = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tabletS: '768px',
+  tabletL: '1112px',
+  laptopS: '1366px',
+  laptopM: '1440px',
+  desktop: '1680px',
+};
 
 const colors = {
   background: '#FFF',
@@ -35,30 +35,30 @@ const fontWeights = {
   bold: 700,
 };
 
-// const shadows = [`0 1px 2px 0 ${colors.background}`, `0 1px 4px 0 ${colors.background}`];
+const shadows = [`0 1px 2px 0 ${colors.background}`, `0 1px 4px 0 ${colors.background}`];
 
 const fontFamily = ["'Helvetica Neue', Arial, Helvetica, sans-serif"];
 
 const baseTheme = {
-//   breakpoints,
+  breakpoints,
   colors,
   fontSizes,
   fontWeights,
   letterSpacings,
   lineHeights,
-  //   shadows,
+  shadows,
   space,
   fontFamily,
 };
 
-export type AppDefaultTheme = typeof baseTheme
+export const lightTheme = {
+  ...baseTheme,
+};
 
-export const lightTheme = baseTheme;
-
-export const darkTheme: AppDefaultTheme = {
+export const darkTheme = {
   ...baseTheme,
   colors: {
     background: '#363537',
-    text: '#FAFAFA',
+    text: '#FFF',
   },
 };

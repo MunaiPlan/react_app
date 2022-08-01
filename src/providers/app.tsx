@@ -4,6 +4,7 @@ import {
   Button,
   CircularProgress,
   createTheme,
+  CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
 } from '@mui/material';
@@ -16,7 +17,6 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { useDarkMode } from 'usehooks-ts';
 
 import { store, persistor } from '~/store';
-import { darkTheme, GlobalStyles, lightTheme } from '~/styles';
 
 function ErrorFallback() {
   return (
@@ -38,14 +38,15 @@ type AppProviderProps = {
 
 export function AppThemeProvider({ children }: AppProviderProps) {
   const { isDarkMode } = useDarkMode();
-  const theme = isDarkMode ? darkTheme : lightTheme;
-  const muiTheme = createTheme({ ...theme, palette: { mode: isDarkMode ? 'dark' : 'light' } });
+  const theme = createTheme({ palette: { mode: isDarkMode ? 'dark' : 'light' } });
 
   return (
+    // Make sure the Material stylesheet is placed above your own
+    // styles so you can overwrite them
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={muiTheme}>
-        <StyledThemeProvider theme={muiTheme}>
-          <GlobalStyles />
+      <ThemeProvider theme={theme}>
+        <StyledThemeProvider theme={theme}>
+          <CssBaseline />
           {children}
         </StyledThemeProvider>
       </ThemeProvider>
