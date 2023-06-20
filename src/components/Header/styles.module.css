@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding: 8px 17px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.avatar {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+.profileModal {
+  position: absolute;
+  top: 42px;
+  right: 8px;
+}
+
+.selectLang {
+  border: none;
+  outline: none;
+}
