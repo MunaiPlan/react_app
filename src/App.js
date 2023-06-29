@@ -1,8 +1,8 @@
 import React from "react";
 import './App.css';
-import Header from './components/Header.js'
 import VerticalNavbar from './components/VerticalNavbar.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from "./components/Header/component";
 
 function App() {
   return (

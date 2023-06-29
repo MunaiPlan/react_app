@@ -1,8 +1,7 @@
-import React from "react";
+//import React from "react";
 
-export default function Header(){
-    console.log("He")
-    return (
-        <h1>Hello World</h1>
-    )
-}
+// export default function Hhleader(){
+//     return (
+//         <h1>Hello World</h1>
+//     )
+// }
